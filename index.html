@@ -21,19 +21,49 @@
         <button onclick="openAdminLogin()">Admin Login</button>
     </div>
 
-    <!-- Search Box -->
-    <div class="search-container">
-        <input type="text" id="searchBox" placeholder="Search for libraries...">
-        <button onclick="searchLibrary()">Search</button>
+    <!-- Super Admin Login Modal -->
+    <div id="superAdminModal" class="modal">
+        <div class="modal-content">
+            <h2>Super Admin Login</h2>
+            <input type="password" id="superAdminPassword" placeholder="Enter Password">
+            <button onclick="superAdminLogin()">Login</button>
+            <button onclick="closeSuperAdminLogin()">Close</button>
+        </div>
     </div>
 
-    <!-- Rajasthan Map -->
-    <div id="map"></div>
+    <!-- Admin Login Modal -->
+    <div id="adminModal" class="modal">
+        <div class="modal-content">
+            <h2>Admin Login</h2>
+            <input type="text" id="adminEmail" placeholder="Email">
+            <input type="password" id="adminPassword" placeholder="Password">
+            <button onclick="adminLogin()">Login</button>
+            <button onclick="closeAdminLogin()">Close</button>
+            <p><a href="#" onclick="openSignUp()">Sign Up</a> | <a href="#" onclick="openForgotPassword()">Forgot Password?</a></p>
+        </div>
+    </div>
 
-    <!-- Library List -->
-    <div id="libraryList"></div>
+    <!-- Sign Up Modal -->
+    <div id="signUpModal" class="modal">
+        <div class="modal-content">
+            <h2>Admin Sign Up</h2>
+            <input type="text" id="newAdminEmail" placeholder="Email">
+            <input type="password" id="newAdminPassword" placeholder="Password">
+            <button onclick="registerAdmin()">Sign Up</button>
+            <button onclick="closeSignUp()">Close</button>
+        </div>
+    </div>
 
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <!-- Forgot Password Modal -->
+    <div id="forgotPasswordModal" class="modal">
+        <div class="modal-content">
+            <h2>Reset Password</h2>
+            <input type="text" id="resetAdminEmail" placeholder="Enter Email">
+            <button onclick="resetPassword()">Reset</button>
+            <button onclick="closeForgotPassword()">Close</button>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 
 </body>
