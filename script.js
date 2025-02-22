@@ -1,57 +1,10 @@
-let map;
-
-// Rajasthan Libraries Data
-let libraries = [
-    { name: "Jaipur Central Library", lat: 26.9124, lng: 75.7873 },
-    { name: "Jodhpur Public Library", lat: 26.2389, lng: 73.0243 },
-    { name: "Udaipur City Library", lat: 24.5854, lng: 73.7125 }
-];
-
-// Initialize Map (Centered on Rajasthan)
-function initMap() {
-    map = L.map('map').setView([26.9124, 75.7873], 7); // Center on Rajasthan
-
-    // Add OpenStreetMap Layer
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; OpenStreetMap contributors'
-    }).addTo(map);
-
-    displayLibrariesOnMap();
-}
-
-// Display Libraries on Map
-function displayLibrariesOnMap() {
-    libraries.forEach(library => {
-        let marker = L.marker([library.lat, library.lng]).addTo(map);
-        marker.bindPopup(`<h3>${library.name}</h3><button onclick="getDirections(${library.lat}, ${library.lng})">Get Directions</button>`);
-    });
-}
-
-// Search Libraries
-function searchLibrary() {
-    let query = document.getElementById("searchBox").value.toLowerCase();
-    let filteredLibraries = libraries.filter(lib => lib.name.toLowerCase().includes(query));
-
-    if (filteredLibraries.length === 0) {
-        alert("No libraries found!");
-    } else {
-        let firstResult = filteredLibraries[0];
-        map.setView([firstResult.lat, firstResult.lng], 10);
-    }
-}
-
-// Get Directions to Library
-function getDirections(lat, lng) {
-    window.open(`https://www.openstreetmap.org/directions?engine=osrm_car&route=${lat},${lng}`, "_blank");
-}
-
 // Toggle Admin Menu
 function toggleAdminMenu() {
     let menu = document.getElementById("adminMenu");
     menu.style.display = menu.style.display === "block" ? "none" : "block";
 }
 
-// Open & Close Login Modals
+// Super Admin Login
 function openSuperAdminLogin() {
     document.getElementById("superAdminModal").style.display = "block";
 }
@@ -60,6 +13,16 @@ function closeSuperAdminLogin() {
     document.getElementById("superAdminModal").style.display = "none";
 }
 
+function superAdminLogin() {
+    let password = document.getElementById("superAdminPassword").value;
+    if (password === "superadmin123") {
+        alert("Super Admin Logged In");
+    } else {
+        alert("Incorrect Password");
+    }
+}
+
+// Admin Login
 function openAdminLogin() {
     document.getElementById("adminModal").style.display = "block";
 }
@@ -68,5 +31,57 @@ function closeAdminLogin() {
     document.getElementById("adminModal").style.display = "none";
 }
 
-// Initialize the map
-initMap();
+function adminLogin() {
+    let email = document.getElementById("adminEmail").value;
+    let password = document.getElementById("adminPassword").value;
+    let storedPassword = localStorage.getItem(email);
+
+    if (storedPassword && storedPassword === password) {
+        alert("Admin Logged In");
+    } else {
+        alert("Invalid Email or Password");
+    }
+}
+
+// Sign Up
+function openSignUp() {
+    document.getElementById("signUpModal").style.display = "block";
+}
+
+function closeSignUp() {
+    document.getElementById("signUpModal").style.display = "none";
+}
+
+function registerAdmin() {
+    let email = document.getElementById("newAdminEmail").value;
+    let password = document.getElementById("newAdminPassword").value;
+
+    if (localStorage.getItem(email)) {
+        alert("Admin already exists!");
+    } else {
+        localStorage.setItem(email, password);
+        alert("Admin Registered!");
+        closeSignUp();
+    }
+}
+
+// Forgot Password
+function openForgotPassword() {
+    document.getElementById("forgotPasswordModal").style.display = "block";
+}
+
+function closeForgotPassword() {
+    document.getElementById("forgotPasswordModal").style.display = "none";
+}
+
+function resetPassword() {
+    let email = document.getElementById("resetAdminEmail").value;
+    if (localStorage.getItem(email)) {
+        let newPassword = prompt("Enter new password:");
+        localStorage.setItem(email, newPassword);
+        alert("Password Reset Successfully!");
+        closeForgotPassword();
+    } else {
+        alert("Admin Not Found!");
+    }
+}
