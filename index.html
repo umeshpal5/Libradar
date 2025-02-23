@@ -3,31 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Super Admin Dashboard</title>
-    <link rel="stylesheet" href="super-admin.css">
+    <title>Libradar - Library Finder</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="dashboard-container">
-        <h2>Super Admin Dashboard</h2>
-        
-        <div class="section">
-            <h3>Pending Admin Approvals</h3>
-            <div id="adminRequests"></div>
-        </div>
 
-        <div class="section">
-            <h3>Registered Admins</h3>
-            <div id="adminList"></div>
+    <header>
+        <h1>Libradar</h1>
+        <div class="menu-icon">
+            <button onclick="openMenu()">☰</button>
         </div>
+    </header>
 
-        <div class="section">
-            <h3>Reported Libraries</h3>
-            <div id="reportedLibraries"></div>
-        </div>
-
-        <button onclick="logout()">Logout</button>
+    <div class="menu" id="menu">
+        <a href="super-admin-login.html">Super Admin</a>
+        <a href="admin-login.html">Admin</a>
     </div>
 
-    <script src="super-admin.js"></script>
+    <div class="search-container">
+        <input type="text" id="searchBox" placeholder="Search libraries...">
+        <button onclick="searchLibrary()">Search</button>
+    </div>
+
+    <div id="map"></div>
+
+    <div id="libraryList"></div>
+
+    <script src="script.js"></script>
 </body>
 </html>
