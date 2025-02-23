@@ -1,50 +1,31 @@
 body {
     font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+    background: #f5f5f5;
     text-align: center;
 }
 
-header {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 20px;
+.dashboard-container {
+    width: 80%;
+    margin: 20px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.section {
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 10px 15px;
     background: #007bff;
     color: white;
-}
-
-.menu button {
-    background: white;
     border: none;
-    padding: 8px 12px;
+    border-radius: 5px;
     cursor: pointer;
-    margin-left: 5px;
-    font-size: 14px;
 }
 
-.search-container {
-    margin: 10px;
-}
-
-#searchBox {
-    padding: 8px;
-    width: 80%;
-}
-
-#map {
-    height: 400px;
-    width: 100%;
-    margin-top: 10px;
-}
-
-.library-item {
-    border: 1px solid #ddd;
-    padding: 10px;
-    margin: 5px;
-}
-
-@media (max-width: 600px) {
-    #map {
-        height: 300px;
-    }
+button:hover {
+    background: #0056b3;
 }
