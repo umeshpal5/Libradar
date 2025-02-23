@@ -1,63 +1,41 @@
-document.getElementById("superAdminBtn").addEventListener("click", function() {
-    document.getElementById("superAdminLogin").style.display = "block";
-});
+document.addEventListener("DOMContentLoaded", function () {
+    let map = L.map('map').setView([27.0238, 74.2179], 7); // Default view on Rajasthan
 
-document.getElementById("adminBtn").addEventListener("click", function() {
-    document.getElementById("adminLogin").style.display = "block";
-});
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
 
-function closeModal(id) {
-    document.getElementById(id).style.display = "none";
-}
-
-// Super Admin Login
-function superAdminLogin() {
-    let password = document.getElementById("superAdminPassword").value;
-    if (password === "superadmin123") {  
-        alert("Super Admin Logged In");
-    } else {
-        alert("Incorrect Password");
-    }
-}
-
-// Admin Login
-function adminLogin() {
-    let email = document.getElementById("adminEmail").value;
-    let password = document.getElementById("adminPassword").value;
-
-    let approvedAdmins = JSON.parse(localStorage.getItem("approvedAdmins")) || [];
-
-    let adminFound = approvedAdmins.find(admin => admin.email === email && admin.password === password);
-
-    if (adminFound) {
-        alert("Admin Logged In");
-    } else {
-        alert("Invalid Credentials or Not Approved");
-    }
-}
-
-// Library Search
-function searchLibrary() {
-    let query = document.getElementById('searchBox').value.trim().toLowerCase();
-    let libraryList = document.getElementById('libraryList');
-    libraryList.innerHTML = '';
-
-    let sampleLibraries = [
-        { name: 'Jaipur Central Library', location: 'Rajasthan' },
-        { name: 'Udaipur Public Library', location: 'Rajasthan' },
-        { name: 'Delhi Knowledge Center', location: 'Delhi' }
+    let libraries = [
+        { name: "Jaipur Library", lat: 26.9124, lon: 75.7873 },
+        { name: "Jodhpur Library", lat: 26.2389, lon: 73.0243 },
+        { name: "Udaipur Library", lat: 24.5854, lon: 73.7125 }
     ];
 
-    let results = sampleLibraries.filter(lib => lib.name.toLowerCase().includes(query) || lib.location.toLowerCase().includes(query));
+    libraries.forEach(lib => {
+        let marker = L.marker([lib.lat, lib.lon]).addTo(map);
+        marker.bindPopup(`<b>${lib.name}</b><br><button onclick="getDirections(${lib.lat}, ${lib.lon})">Get Directions</button>`);
+    });
 
-    if (results.length === 0) {
-        libraryList.innerHTML = '<p>No libraries found.</p>';
-    } else {
-        results.forEach(lib => {
-            let div = document.createElement('div');
-            div.classList.add('library-item');
-            div.innerHTML = `<h3>${lib.name}</h3><p>Location: ${lib.location}</p>`;
-            libraryList.appendChild(div);
-        });
-    }
-}
+    window.searchLibrary = function () {
+        let query = document.getElementById('searchBox').value.trim().toLowerCase();
+        let libraryList = document.getElementById('libraryList');
+        libraryList.innerHTML = '';
+
+        let results = libraries.filter(lib => lib.name.toLowerCase().includes(query));
+
+        if (results.length === 0) {
+            libraryList.innerHTML = '<p>No libraries found.</p>';
+        } else {
+            results.forEach(lib => {
+                let div = document.createElement('div');
+                div.classList.add('library-item');
+                div.innerHTML = `<h3>${lib.name}</h3><p>Location: ${lib.lat}, ${lib.lon}</p>`;
+                libraryList.appendChild(div);
+            });
+        }
+    };
+
+    window.getDirections = function (lat, lon) {
+        window.open(`https://www.openstreetmap.org/directions?engine=graphhopper_foot&route=${lat},${lon}`, '_blank');
+    };
+});
