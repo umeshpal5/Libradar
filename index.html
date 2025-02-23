@@ -8,25 +8,25 @@
 </head>
 <body>
 
+    <!-- Header with Super Admin & Admin Options -->
     <header>
-        <h1>Libradar</h1>
-        <div class="menu-icon">
-            <button onclick="openMenu()">☰</button>
+        <div class="menu">
+            <button onclick="openSuperAdminLogin()">Super Admin</button>
+            <button onclick="openAdminLogin()">Admin</button>
         </div>
+        <h1>Libradar</h1>
     </header>
 
-    <div class="menu" id="menu">
-        <a href="super-admin-login.html">Super Admin</a>
-        <a href="admin-login.html">Admin</a>
-    </div>
-
+    <!-- Library Search Bar -->
     <div class="search-container">
         <input type="text" id="searchBox" placeholder="Search libraries...">
         <button onclick="searchLibrary()">Search</button>
     </div>
 
+    <!-- Map Interface -->
     <div id="map"></div>
 
+    <!-- Library List -->
     <div id="libraryList"></div>
 
     <script src="script.js"></script>
