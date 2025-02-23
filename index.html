@@ -3,52 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Libradar - Library Finder</title>
+    <title>Libradar</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
 <body>
-
-    <!-- Top Navigation Bar -->
     <header>
         <h1>Libradar</h1>
         <div class="menu">
-            <button id="superAdminBtn">Super Admin</button>
-            <button id="adminBtn">Admin</button>
+            <button id="superAdminLogin">Super Admin</button>
+            <button id="adminLogin">Admin</button>
         </div>
     </header>
-
-    <!-- Search Bar -->
-    <section class="search-container">
-        <input type="text" id="searchBox" placeholder="Search libraries by name or location">
+    
+    <div class="search-container">
+        <input type="text" id="searchBox" placeholder="Search for libraries...">
         <button onclick="searchLibrary()">Search</button>
-    </section>
-
-    <!-- Map & Library List -->
-    <section class="map-container">
-        <div id="map"></div>
-        <div id="libraryList"></div>
-    </section>
-
-    <!-- Login Modals -->
-    <div id="superAdminLogin" class="modal">
-        <div class="modal-content">
-            <h2>Super Admin Login</h2>
-            <input type="password" id="superAdminPassword" placeholder="Enter Password">
-            <button onclick="superAdminLogin()">Login</button>
-            <button class="close" onclick="closeModal('superAdminLogin')">Close</button>
-        </div>
     </div>
+    
+    <div id="map"></div>
+    
+    <div id="libraryList"></div>
 
-    <div id="adminLogin" class="modal">
-        <div class="modal-content">
-            <h2>Admin Login</h2>
-            <input type="text" id="adminEmail" placeholder="Email">
-            <input type="password" id="adminPassword" placeholder="Password">
-            <button onclick="adminLogin()">Login</button>
-            <button class="close" onclick="closeModal('adminLogin')">Close</button>
-        </div>
-    </div>
-
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
