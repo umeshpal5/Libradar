@@ -3,68 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Libradar - Rajasthan</title>
+    <title>Libradar - Library Finder</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
 </head>
 <body>
 
-    <!-- Navigation Bar -->
-    <nav>
-        <div class="menu-icon" onclick="toggleAdminMenu()">☰</div>
+    <!-- Top Navigation Bar -->
+    <header>
         <h1>Libradar</h1>
-    </nav>
+        <div class="menu">
+            <button id="superAdminBtn">Super Admin</button>
+            <button id="adminBtn">Admin</button>
+        </div>
+    </header>
 
-    <!-- Admin Menu -->
-    <div id="adminMenu" class="admin-menu">
-        <button onclick="openSuperAdminLogin()">Super Admin Login</button>
-        <button onclick="openAdminLogin()">Admin Login</button>
-    </div>
+    <!-- Search Bar -->
+    <section class="search-container">
+        <input type="text" id="searchBox" placeholder="Search libraries by name or location">
+        <button onclick="searchLibrary()">Search</button>
+    </section>
 
-    <!-- Super Admin Login Modal -->
-    <div id="superAdminModal" class="modal">
+    <!-- Map & Library List -->
+    <section class="map-container">
+        <div id="map"></div>
+        <div id="libraryList"></div>
+    </section>
+
+    <!-- Login Modals -->
+    <div id="superAdminLogin" class="modal">
         <div class="modal-content">
             <h2>Super Admin Login</h2>
             <input type="password" id="superAdminPassword" placeholder="Enter Password">
             <button onclick="superAdminLogin()">Login</button>
-            <button onclick="closeSuperAdminLogin()">Close</button>
+            <button class="close" onclick="closeModal('superAdminLogin')">Close</button>
         </div>
     </div>
 
-    <!-- Admin Login Modal -->
-    <div id="adminModal" class="modal">
+    <div id="adminLogin" class="modal">
         <div class="modal-content">
             <h2>Admin Login</h2>
             <input type="text" id="adminEmail" placeholder="Email">
             <input type="password" id="adminPassword" placeholder="Password">
             <button onclick="adminLogin()">Login</button>
-            <button onclick="closeAdminLogin()">Close</button>
-            <p><a href="#" onclick="openSignUp()">Sign Up</a> | <a href="#" onclick="openForgotPassword()">Forgot Password?</a></p>
-        </div>
-    </div>
-
-    <!-- Sign Up Modal -->
-    <div id="signUpModal" class="modal">
-        <div class="modal-content">
-            <h2>Admin Sign Up</h2>
-            <input type="text" id="newAdminEmail" placeholder="Email">
-            <input type="password" id="newAdminPassword" placeholder="Password">
-            <button onclick="registerAdmin()">Sign Up</button>
-            <button onclick="closeSignUp()">Close</button>
-        </div>
-    </div>
-
-    <!-- Forgot Password Modal -->
-    <div id="forgotPasswordModal" class="modal">
-        <div class="modal-content">
-            <h2>Reset Password</h2>
-            <input type="text" id="resetAdminEmail" placeholder="Enter Email">
-            <button onclick="resetPassword()">Reset</button>
-            <button onclick="closeForgotPassword()">Close</button>
+            <button class="close" onclick="closeModal('adminLogin')">Close</button>
         </div>
     </div>
 
     <script src="script.js"></script>
-
 </body>
 </html>
